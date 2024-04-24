@@ -1,5 +1,4 @@
 import Details from "@/components/Details";
-import { Products } from "@/database/products";
 import fireDB from "@/firebase/initFirebase";
 import Layout from "@/layout"
 import { doc, getDoc } from "firebase/firestore";
