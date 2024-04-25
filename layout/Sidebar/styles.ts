@@ -7,11 +7,7 @@ interface Props {
 
 export const Container = styled.nav<Props>`
   background: #F6F6F6;
-  padding: 50px 0;
-
-  display: flex;
-	flex-direction: column;
-	align-items: center;
+  padding: 25px 0;
   
   top: 0;
   right: 0;
@@ -34,14 +30,37 @@ export const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 8px;
 `
+export const BigWrapper = styled.div`
+  width: 100%;   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 48px;
+`
+export const TitleWrapper = styled.div`
+  width: 100%;   
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+export const Logo = styled(Link)`
+  position: relative;
+  width: 150px;
+  height: 44px;
+  text-decoration: none;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent; 
+`
 export const Close = styled.div`
-  position: absolute;
-  top: 1.2rem;
-  right: 1.5rem;
   background: transparent;
   font-size: 2rem;
   cursor: pointer;
@@ -49,16 +68,6 @@ export const Close = styled.div`
 
   -webkit-tap-highlight-color: transparent;
   user-select: none
-`
-export const Logo = styled(Link)`
-  position: relative;
-  width: 200px;
-  height: 66px;
-  text-decoration: none;
-  cursor: pointer;
-
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-tap-highlight-color: transparent; 
 `
 export const Menu = styled.ul`
   width: 100%;  
@@ -118,7 +127,7 @@ export const CheckoutButton = styled(Link)`
   margin: 0;
   padding: calc(.875rem - 1px) calc(1.5rem - 1px);
 
-  background-color: #5A189A;
+  background-color: #01cc65;
   background-clip: padding-box;
 
   border: 1px solid transparent;
@@ -137,6 +146,7 @@ export const CheckoutButton = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   position: relative;
 
   transition: all 250ms;

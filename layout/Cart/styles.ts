@@ -7,11 +7,7 @@ interface Props {
 
 export const Container = styled.nav<Props>`
   background: #F6F6F6;
-  padding: 50px 0 25px 0;
-
-  display: flex;
-	flex-direction: column;
-	align-items: center;
+  padding: 24px 0;
   
   top: 0;
   left: 0;
@@ -40,10 +36,19 @@ export const Wrapper = styled.div`
 	align-items: center;
 	justify-content: space-between;
 `
+export const TitleWrapper = styled.div`
+  width: 100%;   
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+export const Title = styled.h1`
+  color: #13131A;
+  font-size: 20px;
+  font-weight: 600;
+`
 export const Close = styled.div`
-  position: absolute;
-  top: 1.2rem;
-  right: 1.5rem;
   background: transparent;
   font-size: 2rem;
   cursor: pointer;
@@ -51,12 +56,6 @@ export const Close = styled.div`
 
   -webkit-tap-highlight-color: transparent;
   user-select: none
-`
-export const Title = styled.h1`
-  color: #13131A;
-  font-size: 20px;
-  font-weight: 600;
-  align-self: flex-start;
 `
 export const ProductsWrapper = styled.div`
   width: 100%;

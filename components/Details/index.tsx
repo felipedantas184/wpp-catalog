@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AddToCart, Brand, Favorite, Gallery, GelleryIcon, ImageWrapper, Price, Section, SpaceBetween, TextWrapper, Title, Wrapper } from "./styles";
+import { AddToCart, BigWrapper, Brand, Favorite, Gallery, GelleryIcon, ImageWrapper, Price, Section, SpaceBetween, Stock, TextWrapper, Title, Wrapper } from "./styles";
 import { FaShare } from "react-icons/fa6";
 import Features from "./Features";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,31 +30,33 @@ const Details = ({ product }: Product) => {
             <Image src={product.imageUrl[0]} alt={product.title} fill className={'image'} />
           </ImageWrapper>
           {/**<Gallery>
-          <GelleryIcon><Image src={'/assets/images/floral_beleza.jpg'} alt={'floral_beleza.jpg'} fill className={'image'} /></GelleryIcon>
-        </Gallery>*/}
-          <TextWrapper style={{ marginTop: 24 }} >
+            <GelleryIcon><Image src={'/assets/images/floral_beleza.jpg'} alt={'floral_beleza.jpg'} fill className={'image'} /></GelleryIcon>
+          </Gallery>*/}
+          <BigWrapper>
+            <TextWrapper style={{ marginTop: 24 }} >
             <SpaceBetween>
               <Brand>{product.brand}</Brand>
+              <Stock>{product.stock} restantes</Stock>
+            </SpaceBetween>              <Title>{product.title}</Title>
+              <Price>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(product.price)}</Price>
+            </TextWrapper>
+            <SpaceBetween style={{ paddingLeft: 8, paddingRight: 8, marginTop: 12, alignItems: 'center', gap: 4 }} >
+              {(!cartItem) ? (
+                <>
+                  <AddToCart onClick={() => dispatch(addToCart(product))}>Adicionar ao Carrinho</AddToCart>
+                  <Favorite onClick={() => (navigator.share({ title: "MDN", text: "Learn web development on MDN!", url: "https://developer.mozilla.org" }))} ><FaShare size={16} color='#5A189A' /></Favorite>
+                </>
+              ) : (
+                <>
+                  <AddToCart disabled={product.stock <= cartItem.quantity} onClick={() => dispatch(addToCart(product))}>Adicionar ao Carrinho ({cartItem?.quantity})</AddToCart>
+                  <Favorite onClick={() => (navigator.share({ title: "MDN", text: "Learn web development on MDN!", url: "https://developer.mozilla.org" }))} ><FaShare size={16} color='#5A189A' /></Favorite>
+                </>
+              )}
             </SpaceBetween>
-            <Title>{product.title}</Title>
-            <Price>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(product.price)}</Price>
-          </TextWrapper>
-          <SpaceBetween style={{ paddingLeft: 8, paddingRight: 8, marginTop: 12, alignItems: 'center', gap: 4 }} >
-            {(!cartItem) ? (
-              <>
-                <AddToCart onClick={() => dispatch(addToCart(product))}>Adicionar ao Carrinho</AddToCart>
-                <Favorite onClick={() => (navigator.share({title: "MDN", text: "Learn web development on MDN!", url: "https://developer.mozilla.org"}))} ><FaShare size={16} color='#5A189A' /></Favorite>
-              </>
-            ) : (
-              <>
-                <AddToCart disabled={product.stock <= cartItem.quantity} onClick={() => dispatch(addToCart(product))}>Adicionar ao Carrinho ({cartItem?.quantity})</AddToCart>
-                <Favorite onClick={() => (navigator.share({title: "MDN", text: "Learn web development on MDN!", url: "https://developer.mozilla.org"}))} ><FaShare size={16} color='#5A189A' /></Favorite>
-              </>
-            )}
-          </SpaceBetween>
+            <Features product={product} />
+          </BigWrapper>
         </Wrapper>
       </Section>
-      <Features product={product} />
     </>
   );
 }

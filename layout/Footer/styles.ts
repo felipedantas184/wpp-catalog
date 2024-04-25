@@ -18,6 +18,13 @@ export const Wrapper = styled.div`
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    padding: 32px 8px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
 `
 export const LogoWrapper = styled.div`
   position: relative;
@@ -38,6 +45,23 @@ export const LogoWrapper = styled.div`
     width: 100% !important;
     position: relative !important;
     height: unset !important;
+  }
+`
+export const Grid = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+  gap: 48px;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 8px;
+    padding: 4px;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: center;
   }
 `
 export const TextWrapper = styled.div`
@@ -66,6 +90,17 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   color: #E1E1E1;
   font-size: 16px;
+
+  &::after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px #EB5757;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+  }
+  &:hover::after {
+    transform: scaleX(1);
+  }
 `
 export const SocialNav = styled.ul`
 	list-style: none;

@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { CheckoutButton, Divider, InfoWrapper, PaymentWrapper, Section, Span, SpanBold, Subtitle, Summary, SummaryTitle, TextWrapper, Title, Topic, TopicBold, TopicWrapper, Wrapper } from "./styles";
+import { BackWrapper, CheckoutButton, Divider, InfoWrapper, PaymentWrapper, Section, Span, SpanBold, Subtitle, Summary, SummaryTitle, TextWrapper, Title, Topic, TopicBold, TopicWrapper, Wrapper } from "./styles";
 import ProductSummary from "./ProductSummary";
 import { FaCheckCircle } from "react-icons/fa";
-import { FaCreditCard, FaPix } from "react-icons/fa6";
+import { FaArrowLeft, FaCreditCard, FaPix } from "react-icons/fa6";
 
 type Item = {
   id: string,
@@ -29,6 +29,10 @@ const Confirmation = () => {
   return (
     <Section>
       <Wrapper>
+        <BackWrapper href={'/'} >
+          <FaArrowLeft size={16} color="#13131A" />
+          <Subtitle>Página inicial</Subtitle>
+        </BackWrapper>
         <TextWrapper>
           <FaCheckCircle size={48} color="#08A045" />
           <Title>Estamos Quase Lá!</Title>

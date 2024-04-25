@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Section = styled.section`
@@ -68,6 +69,15 @@ export const Divider = styled.div`
   width: 100%;
   margin-top: 8px;
   border-top: 1px solid #BBB;
+`
+export const BackWrapper = styled(Link)`
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
 `
 export const TopicWrapper = styled.div`
   width: 100%;

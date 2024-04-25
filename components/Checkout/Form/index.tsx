@@ -125,7 +125,7 @@ const Form = () => {
         <Topic>Total</Topic>
         <Price>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(cart.reduce((acc: any, curr: any) => acc + curr.price * curr.quantity, 0))}</Price>
       </TopicWrapper>
-      <CheckoutButton type="submit" >Adicionar Pedido</CheckoutButton>
+      <CheckoutButton type="submit" >Finalizar Pedido</CheckoutButton>
       {/** <a href={`https://wa.me//5586995185757?text=${mesage}`}>Bora</a>*/}
     </Wrapper>
   );

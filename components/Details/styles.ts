@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const Section = styled.section`
   background-color: #F6F6F6;
   padding: 0 0 25px 0;
+  min-height: 86vh;
+
+  @media screen and (min-width: 768px) {
+    padding: 25px 0;
+  }
 `
 export const Wrapper = styled.div`
   width: 100%;
@@ -11,10 +16,17 @@ export const Wrapper = styled.div`
 	margin-right: auto;
 
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
   gap: 8px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
 `
 export const ImageWrapper = styled.div`
   position: relative;
@@ -43,6 +55,10 @@ export const ImageWrapper = styled.div`
     &:hover {
       transform: scale(1.1);
     }
+  }
+
+  @media screen and (min-width: 768px) {
+    border-radius: 20px;
   }
 `
 export const Gallery = styled.div`
@@ -83,6 +99,14 @@ export const GelleryIcon = styled.div`
     }
   }
 `
+export const BigWrapper = styled.div`
+  width: 100%;
+  padding: 0 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`
 export const TextWrapper = styled.div`
   width: 100%;
   padding: 0 12px;
@@ -104,6 +128,11 @@ export const Brand = styled.h3`
   font-size: 16px;
   font-weight: 500;
   text-transform: uppercase;
+`
+export const Stock = styled.span`
+  color: #EE4B2B;
+  font-size: 14px;
+  font-weight: 400;
 `
 export const Title = styled.h2`
   color: #13131A;
