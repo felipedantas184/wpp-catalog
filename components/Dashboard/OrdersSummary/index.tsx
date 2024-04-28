@@ -52,7 +52,7 @@ const OrdersSummary = ({ orders, products }: any) => {
             </SpaceBetween>
             <TextWrapper>
               {order.cart.map((product: any) => (
-                <SText>- {getProductName(product.id)} (x{product.quantity})</SText>
+                <SText key={product.id} >- {getProductName(product.id)} (x{product.quantity})</SText>
               ))}
             </TextWrapper>
           </Order>
