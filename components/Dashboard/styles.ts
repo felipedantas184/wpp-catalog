@@ -79,6 +79,8 @@ export const BigTitle = styled.h2`
   color: #13131A;
   font-size: 16px;
   font-weight: 600;
+  align-self: flex-start;
+  padding: 0 8px;
 `
 export const Product = styled.div`
  width: 100%;

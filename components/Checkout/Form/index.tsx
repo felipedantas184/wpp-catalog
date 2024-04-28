@@ -48,6 +48,10 @@ const Form = () => {
 
   }, [cart, delivery, personal])
 
+  const date = new Date();
+  const CurrentDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+  console.log(CurrentDate)
+
   const handleOrder = async (e: any) => {
     e.preventDefault()
     cart.forEach((item: any) => {
@@ -65,6 +69,7 @@ const Form = () => {
         delivery: pickUp ? 'Retirar na Loja' : delivery,
         paymentMethod: paymentMethod,
         amount: cart.reduce((acc: any, curr: any) => acc + curr.price * curr.quantity, 0),
+        date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
       }).then(function (docRef) {
         dispatch(addOrder({
           id: docRef.id, 
@@ -72,7 +77,8 @@ const Form = () => {
           cart: cart,
           delivery: pickUp ? 'Retirar na Loja' : delivery,
           paymentMethod: paymentMethod,
-          amount: cart.reduce((acc: any, curr: any) => acc + curr.price * curr.quantity, 0)
+          amount: cart.reduce((acc: any, curr: any) => acc + curr.price * curr.quantity, 0),
+          date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
         }))
         localStorage.setItem("wpp-catalog-order", JSON.stringify({
           id: docRef.id, 
@@ -80,7 +86,8 @@ const Form = () => {
           cart: cart,
           delivery: pickUp ? 'Retirar na Loja' : delivery,
           paymentMethod: paymentMethod,
-          amount: cart.reduce((acc: any, curr: any) => acc + curr.price * curr.quantity, 0)
+          amount: cart.reduce((acc: any, curr: any) => acc + curr.price * curr.quantity, 0),
+          date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
         }))
         localStorage.removeItem("wpp-catalog-cart")
         cart.map((item : any) => (

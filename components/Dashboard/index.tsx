@@ -3,6 +3,7 @@ import { BigCard, BigMenu, BigTitle, Brand, Card, CardNumber, CardTitle, ImageWr
 import Image from "next/image";
 import { useState } from "react";
 import UpdateProduct from "./UpdateProduct";
+import OrdersSummary from "./OrdersSummary";
 
 const Dashboard = ({ products, orders }: any) => {
   type Product = {
@@ -12,7 +13,7 @@ const Dashboard = ({ products, orders }: any) => {
     price: number,
     stock: number,
   }
-  
+
   const [selectedProduct, setSelectedProduct] = useState<any>()
 
   return (
@@ -26,15 +27,15 @@ const Dashboard = ({ products, orders }: any) => {
           </Card>
           <Card>
             <CardTitle>Receita Total</CardTitle>
-            <CardNumber>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(orders.reduce((acc:any, curr:any) => acc + curr.amount, 0))}</CardNumber>
+            <CardNumber>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(orders.reduce((acc: any, curr: any) => acc + curr.amount, 0))}</CardNumber>
           </Card>
           <Card>
             <CardTitle>Ticket Médio</CardTitle>
-            <CardNumber>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(orders.reduce((acc:any, curr:any) => (acc + curr.amount), 0)/orders.length)}</CardNumber>
+            <CardNumber>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(orders.reduce((acc: any, curr: any) => (acc + curr.amount), 0) / orders.length)}</CardNumber>
           </Card>
           <Card>
             <CardTitle>Total no Mês</CardTitle>
-            <CardNumber>R$ 10.000,00</CardNumber>
+            <CardNumber>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(orders.filter((order: any) => (order.date.slice(3,4) === `${new Date().getMonth()+1}`)).reduce((acc: any, curr: any) => (acc + curr.amount), 0))}</CardNumber>
           </Card>
         </Menu>
         <BigMenu>
@@ -65,6 +66,12 @@ const Dashboard = ({ products, orders }: any) => {
                 )}
               </>
             ))}
+          </BigCard>
+        </BigMenu>
+        <BigMenu>
+          <BigCard>
+            <BigTitle>Pedidos</BigTitle>
+            <OrdersSummary orders={orders} products={products} />
           </BigCard>
         </BigMenu>
       </Wrapper>
