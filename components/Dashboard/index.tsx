@@ -1,5 +1,5 @@
 import { FaEdit } from "react-icons/fa";
-import { BigCard, BigMenu, BigTitle, Brand, Card, CardNumber, CardTitle, ImageWrapper, Menu, PTitle, Price, Product, Quantity, Section, TextWrapper, Title, TopicWrapper, Wrapper } from "./styles";
+import { BigCard, BigMenu, BigTitle, Brand, Card, CardNumber, CardTitle, ImageWrapper, Menu, PTitle, Price, Product, Quantity, Section, SpaceBetween, TextWrapper, Title, TopicWrapper, Wrapper } from "./styles";
 import Image from "next/image";
 import { useState } from "react";
 import UpdateProduct from "./UpdateProduct";
@@ -47,17 +47,17 @@ const Dashboard = ({ products, orders }: any) => {
                   <ImageWrapper href={'/'}>
                     <Image src={product.imageUrl[0]} alt={product.title} fill className={'image'} sizes="(max-width: 384px)" />
                   </ImageWrapper>
-                  <TextWrapper style={{ flex: 2 }} >
-                    <Brand>{product.brand}</Brand>
-                    <PTitle>{product.title}</PTitle>
-                  </TextWrapper>
-                  <TopicWrapper>
-                    <Quantity>Est.: {product.stock}</Quantity>
+                  <TextWrapper>
+                    <SpaceBetween>
+                      <Brand>{product.brand}</Brand>
+                      <FaEdit size={16} color="#D4D4D4" onClick={() => setSelectedProduct(product.id)} />
+                    </SpaceBetween>
+                    <SpaceBetween>
+                      <PTitle>{product.title}</PTitle>
+                      <Quantity>Est.: {product.stock}</Quantity>
+                    </SpaceBetween>
                     <Price>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(product.price)}</Price>
-                  </TopicWrapper>
-                  <TopicWrapper>
-                    <FaEdit size={16} color="#D4D4D4" onClick={() => setSelectedProduct(product.id)} />
-                  </TopicWrapper>
+                  </TextWrapper>
                 </Product>
                 {(product.id === selectedProduct) ? (
                   <UpdateProduct product={product} setSelectedProduct={setSelectedProduct} />

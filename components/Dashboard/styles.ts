@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-  gap: 24px;
+  gap: 16px;
   min-height: 86vh;
 
   @media screen and (max-width: 768px) {
@@ -24,8 +24,8 @@ export const Wrapper = styled.div`
 `
 export const Title = styled.h1`
   color: #13131A;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
 `
 export const Menu = styled.div`
   width: 100%;
@@ -47,13 +47,13 @@ export const Card = styled.div`
 `
 export const CardTitle = styled.h5`
   color: #13131A;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   align-self: flex-start;
 `
 export const CardNumber = styled.span`
   color: #13131A;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   align-self: flex-start;
 `
@@ -118,7 +118,15 @@ export const ImageWrapper = styled(Link)`
     }
   }
 `
+export const SpaceBetween = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
 export const TextWrapper = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -133,13 +141,13 @@ export const TopicWrapper = styled.div`
 `
 export const Brand = styled.h3`
   color: #13131A;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
 `
 export const PTitle = styled.h2`
   color: #13131A;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
 `
 export const Price = styled.span`
