@@ -98,7 +98,7 @@ const Register = () => {
             <Label>Foto</Label>
             <Input type='file' accept="image/*" required onChange={(e) => (setImageUpload(e.target.files))} multiple />
           </InputWrapper>
-          <RegistertButton type="submit" >Adicionar Pedido</RegistertButton>
+          <RegistertButton type="submit" >Adicionar Produto</RegistertButton>
         </Form>
       </Wrapper>
     </Section>
