@@ -40,3 +40,10 @@ export const SText = styled.span`
   font-weight: 500;
   align-self: flex-start;
 `
+export const DoubleIcon = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+`

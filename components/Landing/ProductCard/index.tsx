@@ -35,7 +35,7 @@ const ProductCard = ({ product }: Product) => {
         <Title>{product.title}</Title>
         <Price>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(product.price)}</Price>
       </TextWrapper>
-      {(product.stock === 0) ? (
+      {(product.stock <= 0) ? (
         <AddButton disabled>Esgotado</AddButton>
       ) : (
         (cartItem) ? (

@@ -1,6 +1,6 @@
-import { FaCreditCard, FaLocationPin, FaTrash, FaTruck, FaUser } from "react-icons/fa6";
-import { Divider, MainText, Order, SText, SpaceBetween, TextWrapper } from "./styles";
-import { FieldValue, deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
+import { FaCreditCard, FaLocationPin, FaTrash, FaTruck, FaUser, FaWhatsapp } from "react-icons/fa6";
+import { Divider, DoubleIcon, MainText, Order, SText, SpaceBetween, TextWrapper } from "./styles";
+import { deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
 import fireDB from "@/firebase/initFirebase";
 
 const OrdersSummary = ({ orders, products }: any) => {
@@ -34,7 +34,12 @@ const OrdersSummary = ({ orders, products }: any) => {
           <Order>
             <SpaceBetween>
               <MainText><FaUser size={10} color="#13313a" /> {order.personal.name}</MainText>
-              <FaTrash size={16} color="#F1AAAA" onClick={() => deleteData(order)} />
+              <DoubleIcon>
+                <a href="https://wa.me//5586995185757" >
+                  <FaWhatsapp size={16} color="#01cc65" /> 
+                </a>
+                <FaTrash size={16} color="#F1AAAA" onClick={() => deleteData(order)} />
+              </DoubleIcon>
             </SpaceBetween>
             <SpaceBetween>
               <SText><FaCreditCard size={10} color="#A4A4A4" /> {order.paymentMethod}</SText>

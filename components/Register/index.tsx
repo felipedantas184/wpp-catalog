@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, Input, InputDoubleWrapper, InputWrapper, Label, RegistertButton, Section, TextArea, Title, Wrapper } from "./styles";
 import fireDB, { storage } from "@/firebase/initFirebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { v4 } from "uuid";
 
@@ -29,28 +29,29 @@ const Register = () => {
     e.preventDefault()
     try {
       if (imageUpload == null) return;
-
       var imagesUrls: any = []
-      for (let i = 0; i < imageUpload.length; i++) {
-        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-        await uploadBytes(imageRef, imageUpload[i]).then(async (snapshot) => {
-          await getDownloadURL(snapshot.ref).then((url) => {
-            imagesUrls.push(url)
-          })
-        })
-      }
-      addDoc(collection(fireDB, "products"), {
+
+      await addDoc(collection(fireDB, "products"), {
         title: newProduct.title,
         brand: newProduct.brand,
         description: newProduct.description,
         price:  Number(newProduct.price),
         stock:  Number(newProduct.stock),
-        imageUrl: imagesUrls,
-        featureImage: imagesUrls[0],
+      }).then(async (docRef) => {
+        for (let i = 0; i < imageUpload.length; i++) {
+          const imageRef = ref(storage, `images/${docRef.id}/${imageUpload[i].name + v4()}`);
+          await uploadBytes(imageRef, imageUpload[i]).then(async (snapshot) => {
+            await getDownloadURL(snapshot.ref).then((url) => {
+              imagesUrls.push(url)
+            })
+          })
+        }
+        updateDoc(doc(fireDB, "products", docRef.id), {
+          imageUrl: imagesUrls,
+        })
       })
       alert("Produto adicionado com sucesso!")
       router.push({ pathname: '/' })
-
     } catch (error) {
       alert(error)
     }
@@ -95,7 +96,7 @@ const Register = () => {
           </InputDoubleWrapper>
           <InputWrapper>
             <Label>Foto</Label>
-            <Input type='file' accept="image/*" required onChange={(e) => (setImageUpload(e.target.files))} />
+            <Input type='file' accept="image/*" required onChange={(e) => (setImageUpload(e.target.files))} multiple />
           </InputWrapper>
           <RegistertButton type="submit" >Adicionar Pedido</RegistertButton>
         </Form>

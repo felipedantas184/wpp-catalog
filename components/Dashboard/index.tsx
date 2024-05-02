@@ -1,20 +1,27 @@
 import { FaEdit } from "react-icons/fa";
-import { BigCard, BigMenu, BigTitle, Brand, Card, CardNumber, CardTitle, ImageWrapper, Menu, PTitle, Price, Product, Quantity, Section, SpaceBetween, TextWrapper, Title, TopicWrapper, Wrapper } from "./styles";
+import { AddButton, BigCard, BigMenu, BigTitle, Brand, Card, CardNumber, CardTitle, Divider, DoubleIcon, ImageWrapper, Menu, PTitle, Price, Product, Quantity, Section, SpaceBetween, TextWrapper, Title, TopicWrapper, Wrapper } from "./styles";
 import Image from "next/image";
 import { useState } from "react";
 import UpdateProduct from "./UpdateProduct";
 import OrdersSummary from "./OrdersSummary";
+import { FaTrash } from "react-icons/fa6";
+import { deleteDoc, doc } from "firebase/firestore";
+import fireDB from "@/firebase/initFirebase";
 
 const Dashboard = ({ products, orders }: any) => {
-  type Product = {
-    title: string,
-    brand: string,
-    description: string,
-    price: number,
-    stock: number,
-  }
-
   const [selectedProduct, setSelectedProduct] = useState<any>()
+
+  async function deleteProduct(product: any) {
+    try {
+      if (confirm("Você tem certeza de que deseja excluir este produto?") == true) {
+        await deleteDoc(doc(fireDB, "products", product.id)).then(function () {
+          alert("Produto excluído!")
+        })
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
 
   return (
     <Section>
@@ -35,7 +42,7 @@ const Dashboard = ({ products, orders }: any) => {
           </Card>
           <Card>
             <CardTitle>Total no Mês</CardTitle>
-            <CardNumber>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(orders.filter((order: any) => (order.date.slice(3,4) === `${new Date().getMonth()+1}`)).reduce((acc: any, curr: any) => (acc + curr.amount), 0))}</CardNumber>
+            <CardNumber>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', }).format(orders.filter((order: any) => (order.date.slice(3, 4) === `${new Date().getMonth() + 1}`)).reduce((acc: any, curr: any) => (acc + curr.amount), 0))}</CardNumber>
           </Card>
         </Menu>
         <BigMenu>
@@ -50,7 +57,10 @@ const Dashboard = ({ products, orders }: any) => {
                   <TextWrapper>
                     <SpaceBetween>
                       <Brand>{product.brand}</Brand>
-                      <FaEdit size={16} color="#D4D4D4" onClick={() => setSelectedProduct(product.id)} />
+                      <DoubleIcon>
+                        <FaEdit size={16} color="#D4D4D4" onClick={() => (selectedProduct === product.id) ? (setSelectedProduct('')) : (setSelectedProduct(product.id))} />
+                        <FaTrash size={16} color="#F1AAAA" onClick={() => deleteProduct(product)} />
+                      </DoubleIcon>
                     </SpaceBetween>
                     <SpaceBetween>
                       <PTitle>{product.title}</PTitle>
@@ -64,8 +74,10 @@ const Dashboard = ({ products, orders }: any) => {
                 ) : (
                   <></>
                 )}
+                <Divider />
               </>
             ))}
+            <AddButton href={'/register'}>Adicionar Produto</AddButton>
           </BigCard>
         </BigMenu>
         <BigMenu>

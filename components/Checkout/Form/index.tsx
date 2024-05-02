@@ -4,7 +4,7 @@ import Payment from "./Payment";
 import Personal from "./Personal";
 import { CheckoutButton, Divider, Price, RadioButtons, RadioInput, RadioLabel, Title, Topic, TopicWrapper, Wrapper } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, increment, updateDoc } from "firebase/firestore";
 import fireDB from "@/firebase/initFirebase";
 import { removeFromCart } from "@/redux/cart.slice";
 import { useRouter } from "next/router";
@@ -92,7 +92,7 @@ const Form = () => {
         localStorage.removeItem("wpp-catalog-cart")
         cart.map((item : any) => (
           updateDoc(doc(fireDB, "products", item.id), {
-            stock: item.stock-item.quantity,
+            stock: increment(-item.quantity),
           })
         ))
       }).then(
